@@ -1,18 +1,19 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-  <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   <PageHeader msg=""/>
+  <div class="main">
+    <LeftNavigation id="left-nav"/>
+  </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 import PageHeader from './components/PageHeader.vue'
+import LeftNavigation from './components/LeftNavigation.vue'
 
 export default {
   name: 'App',
   components: {
-    // HelloWorld
-    PageHeader
+    PageHeader,
+    LeftNavigation
   }
 }
 </script>
@@ -26,4 +27,9 @@ export default {
   color: #2c3e50;
   margin-top: 10px;
 }
+.main {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
 </style>
