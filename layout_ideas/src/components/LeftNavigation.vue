@@ -5,7 +5,7 @@
     <h2 class="item">Item 3</h2>
     <h2 class="item">Item 4</h2>
     <h2 class="item">Item 5</h2>
-    <div class="spacer">spacing box</div>
+    <h2 class="spacer">spacing box</h2>
   </div>
 </template>
 
@@ -20,11 +20,10 @@
 
 <style>
   .main {
-    /* height: 100%;
+    height: 100%; 
     max-width: 315px;
-    display: flex;
-    flex-direction: column; */
-    background-color: cyan; 
+    float: start;
+    background-color: cyan;``
   }
 
 </style>

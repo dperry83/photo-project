@@ -1,6 +1,6 @@
 <template>
   <PageHeader msg=""/>
-  <div class="main">
+  <div class="main-body">
     <LeftNavigation id="left-nav"/>
   </div>
 </template>
@@ -26,10 +26,23 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 10px;
+  height: 100%;
 }
-.main {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
+.main-body {
+  /* display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);   */
+  height: 100%;
+  width: 100%;
+}
+.item {
+  background-color: white;
+  grid-row-start: 1;
+  grid-row-end: 1;
+}
+.main-body > #left-nav > .spacer {
+  grid-row-start: 2;  
+  background-color: white;
 }
 
 </style>
