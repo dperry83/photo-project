@@ -1,8 +1,9 @@
 <template>
   <PageHeader msg=""/>
-  <div class="main-body">
-    <LeftNavigation id="left-nav"/>
-  </div>
+  <LeftNavigation id="left-nav"/>
+    <div class="main-body">
+      <div class="content">CONTENT</div>
+    </div>
 </template>
 
 <script>
@@ -19,30 +20,30 @@ export default {
 </script>
 
 <style>
+body {
+  height: 100vh;
+  border: 4px green solid;
+}
 #app {
+  border: 3px red solid;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 10px;
-  height: 100%;
+  display: grid;
+  height: 100vh;
+  grid-template: repeat(3, 1fr) / 1fr 1fr 1fr;
 }
 .main-body {
-  /* display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(3, 1fr);   */
-  height: 100%;
-  width: 100%;
+  border: 2px black solid;
+  gap: 5px 5px;
 }
-.item {
-  background-color: white;
-  grid-row-start: 1;
-  grid-row-end: 1;
-}
-.main-body > #left-nav > .spacer {
-  grid-row-start: 2;  
-  background-color: white;
+#left-nav {
+  border: 1px blue solid;
+  background-color: grey;
+  grid-column: 1 / span 3;
 }
 
 </style>

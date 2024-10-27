@@ -43,10 +43,13 @@ export default {
   }
   #header {
     display: flex;
-    /* flex-wrap: wrap; */
     align-content: end;
     background-color: gold;
-    padding: 15px;
+    border: 3px pink solid;
+    padding: 5px;
+    margin: 10px;
+    max-height: 100px;
+    object-fit: fill;
   }
 
 </style>
