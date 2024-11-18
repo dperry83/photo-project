@@ -2,19 +2,23 @@
   <div class="main-layout">
     <PageHeader class="banner" id="header"/>
     <LeftNavigation id="left-nav"/>
-    <div class="content">main content</div>
+    <div class="content">
+      <BioCard class="user-info"></BioCard>
+    </div>
   </div>
 </template>
 
 <script>
 import PageHeader from '../components/PageHeader.vue'
 import LeftNavigation from '../components/LeftNavigation.vue'
+import BioCard from '../components/BioCard.vue'
 
 export default {
   name: 'GalleryPage',
   components: {
     PageHeader,
-    LeftNavigation
+    LeftNavigation,
+    BioCard
   }
 }
 
@@ -38,6 +42,10 @@ export default {
 .content {
   border: 2px solid blue;
   grid-area: 2 / 3 / span 8 / span 8;
+}
+.user-info {
+  max-height: 100%;
+  max-width: 100%;
 }
 
 </style>
