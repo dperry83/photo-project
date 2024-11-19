@@ -26,10 +26,11 @@
   .main {
     display: flex;
     flex-direction: column;
-    /* max-width: 315px; */
   }
+  
   .spacing {
-    height: fit;
+    height: 100vh;
+    
   }
 
 </style>

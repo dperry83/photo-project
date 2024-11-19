@@ -2,7 +2,7 @@
   <div class="main-layout">
     <PageHeader class="banner" id="header"/>
     <LeftNavigation id="left-nav"/>
-    <div class="content">
+    <div class="content">main content
       <BioCard class="user-info"></BioCard>
     </div>
   </div>
@@ -28,8 +28,8 @@ export default {
 .main-layout {
   border: 5px solid black;
   height: 100vh;
+  width: 100vw;
   display: grid;
-  width: fit;
   grid-template: repeat(9, 1fr) / repeat(9, 1fr); 
 }
 #header {
@@ -42,10 +42,11 @@ export default {
 .content {
   border: 2px solid blue;
   grid-area: 2 / 3 / span 8 / span 8;
+  display: grid;
+  grid-template: repeat(7, 1fr) / repeat(7, 1fr);
 }
 .user-info {
-  max-height: 100%;
-  max-width: 100%;
+  grid-area: 1 / 1 / span 3 / span 7;
 }
 
 </style>
