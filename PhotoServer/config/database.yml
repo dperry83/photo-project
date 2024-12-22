@@ -16,7 +16,7 @@ default: &default
 development:
   adapter: mysql2
   encoding: utf8mb4
-  database: project_database
+  database: photo_database
   username: root
   password: Flashlight!83
   host: localhost

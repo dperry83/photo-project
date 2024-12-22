@@ -10,43 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_22_202534) do
-  create_table "Comments", primary_key: "commentID", id: :integer, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.timestamp "date", default: -> { "CURRENT_TIMESTAMP" }
-    t.string "text", limit: 250
-    t.integer "photoID"
-    t.integer "shootID"
-    t.integer "userID"
-    t.index ["commentID"], name: "commentID", unique: true
-    t.index ["photoID"], name: "photoID"
-    t.index ["shootID"], name: "shootID"
-    t.index ["userID"], name: "userID"
+ActiveRecord::Schema[8.0].define(version: 2024_12_22_165229) do
+  create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.timestamp "date"
+    t.string "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "Photos", primary_key: "photoID", id: :integer, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "fileName", limit: 50
-    t.integer "shootID"
-    t.index ["photoID"], name: "photoID", unique: true
-    t.index ["shootID"], name: "shootID"
+  create_table "photos", primary_key: "photo_id", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "file_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "Shoots", primary_key: "shootID", id: :integer, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name", limit: 150
+  create_table "shoots", primary_key: "shoot_id", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
     t.date "date"
-    t.integer "userID"
-    t.index ["shootID"], name: "shootID", unique: true
-    t.index ["userID"], name: "userID"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "Users", primary_key: "userID", id: :integer, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name", limit: 100
-    t.string "email", limit: 100
-    t.index ["userID"], name: "userID", unique: true
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "email"
+    t.string "password"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
-
-  add_foreign_key "Comments", "Photos", column: "photoID", primary_key: "photoID", name: "comments_ibfk_1"
-  add_foreign_key "Comments", "Shoots", column: "shootID", primary_key: "shootID", name: "comments_ibfk_2"
-  add_foreign_key "Comments", "Users", column: "userID", primary_key: "userID", name: "comments_ibfk_3"
-  add_foreign_key "Photos", "Shoots", column: "shootID", primary_key: "shootID", name: "photos_ibfk_1"
-  add_foreign_key "Shoots", "Users", column: "userID", primary_key: "userID", name: "shoots_ibfk_1"
 end
