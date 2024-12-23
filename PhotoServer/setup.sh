@@ -31,7 +31,8 @@ bundle install
 # Check for MySQL
 if command -v > /dev/null 2>&1; then
   echo "MySQL found. Setting up the database..."
-  mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS photo_database;"
+  brew services start mysql@8.0
+  mysql -u root -e "CREATE DATABASE IF NOT EXISTS photo_database;"
   echo "Database created or already exists."
 else
   echo "MySQL not found.  Please install it and ensure it is running."
