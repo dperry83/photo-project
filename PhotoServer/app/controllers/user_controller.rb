@@ -1,4 +1,5 @@
 class UserController < ApplicationController
+  skip_before_action :require_authentication, only: [:create]
 
   def index
     @users = User.all
@@ -10,12 +11,12 @@ class UserController < ApplicationController
     if user.save
       render json: user, status: :created
     else
-      render json: { error: user.errors.full_messages }, 
+      render json: { error: user.errors.full_messages },
       status: :unprocessable_entity
     end
   end
 
   def user_params
-    params.require(:user).permit(:name, :email)
+    params.require(:user).permit(:email_address, :password, :name)
   end
 end
