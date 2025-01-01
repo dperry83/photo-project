@@ -1,5 +1,6 @@
 class UserController < ApplicationController
-  skip_before_action :require_authentication, only: [:create]
+  # do not require authentication to create a new
+  skip_before_action :require_authentication, only: [ :create ]
 
   def index
     @users = User.all
@@ -14,6 +15,10 @@ class UserController < ApplicationController
       render json: { error: user.errors.full_messages },
       status: :unprocessable_entity
     end
+  end
+
+  def update
+
   end
 
   def user_params
