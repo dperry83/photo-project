@@ -17,9 +17,9 @@ class UserController < ApplicationController
     end
   end
 
-  def update
+  # def update
 
-  end
+  # end
 
   def user_params
     params.require(:user).permit(:email_address, :password, :name)
