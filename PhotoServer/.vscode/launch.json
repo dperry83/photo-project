@@ -5,12 +5,23 @@
   "version": "0.2.0",
   "configurations": [
     
+
     {
-      "name": "Rails server",
       "type": "ruby_lsp",
+      "name": "Debug script",
       "request": "launch",
-      "program": "${workspaceRoot}/bin/rails",
-      "args": ["server"]
+      "program": "ruby ${file}"
+    },
+    {
+      "type": "ruby_lsp",
+      "name": "Debug test",
+      "request": "launch",
+      "program": "ruby -Itest ${relativeFile}"
+    },
+    {
+      "type": "ruby_lsp",
+      "name": "Attach debugger",
+      "request": "attach"
     }
   ]
 }
