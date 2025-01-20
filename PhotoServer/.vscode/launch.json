@@ -7,11 +7,10 @@
     
     {
       "name": "Rails server",
-      "type": "ruby",
+      "type": "ruby_lsp",
       "request": "launch",
       "program": "${workspaceRoot}/bin/rails",
-      "args": ["server"],
-      "useBundler": true
+      "args": ["server"]
     }
   ]
 }
