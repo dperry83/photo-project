@@ -7,8 +7,8 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(params[:email])
-    if (@user = User.authenticate_by(params.permit(:email_address, :password)))
+    # if (user = User.authenticate_by(params.permit(:email_address, :password)))
+    if (@user = User.authenticate_by(session_params))
       start_new_session_for user
       redirect_to after_authentication_url, alert: "You've successfully logged in, #{user.name}"
     else
@@ -17,6 +17,9 @@ class SessionsController < ApplicationController
     end
   end
 
+  def session_params
+    params.require(:user).permit(:email_address, :password)
+  end
   def destroy
     terminate_session
     redirect_to new_session_path
