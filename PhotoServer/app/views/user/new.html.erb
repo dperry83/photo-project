@@ -1,0 +1,21 @@
+<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+
+<%= form_with url: user_path do |form|  %>
+  <% form.name_field :name,
+                     required: true,
+                     autofocus: true,
+                     placeholder: "Name",
+                     value: params[:name] %>
+  <% form.email_field :email_address,
+                      required: true,
+                      autocomplete: "email_address",
+                      placeholder: "Enter your name",
+                      value: params[:email_address] %> <br>
+  <% form.password_field :password,
+                         required: true,
+                         autocomplete: "new-password",
+                         placeholder: "Create a Password",
+                         value: params[:password],
+                         maxlength: 72 %> <br>
+  <% form.submit "Register" %>
+<% end %>
