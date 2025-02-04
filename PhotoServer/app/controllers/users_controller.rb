@@ -1,13 +1,15 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
   # do not require authentication to create a new
   skip_before_action :require_authentication, only: [ :new, :create ]
 
+  def new
+    @user = User.new
+  end
   def index
     @users = User.all
     render json: @users
   end
-  def new
-  end
+
   def create
     user = User.new(user_params)
     if user.save
