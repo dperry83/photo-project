@@ -1,7 +1,5 @@
 <%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
 
-<% debug @user %>
-
 <%= form_with model: @user do |form|  %>
 <!--<form action="/users" method="post">-->
   <%= form.email_field :email_address,
