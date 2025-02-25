@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.0].define(version: 2024_12_23_201604) do
-  create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "comments", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
     t.string "text"
     t.bigint "photo_id", null: false
     t.bigint "user_id", null: false
@@ -21,7 +21,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_23_201604) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "photos", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "photos", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
     t.string "file_name"
     t.bigint "shoot_id", null: false
     t.datetime "created_at", null: false
@@ -29,7 +29,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_23_201604) do
     t.index ["shoot_id"], name: "index_photos_on_shoot_id"
   end
 
-  create_table "sessions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "sessions", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "ip_address"
     t.string "user_agent"
@@ -38,7 +38,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_23_201604) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
-  create_table "shoots", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "shoots", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
     t.string "shoot_name"
     t.date "shoot_date"
     t.bigint "user_id", null: false
@@ -47,7 +47,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_23_201604) do
     t.index ["user_id"], name: "index_shoots_on_user_id"
   end
 
-  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_uca1400_ai_ci", force: :cascade do |t|
     t.string "email_address", null: false
     t.string "password_digest", null: false
     t.string "name"

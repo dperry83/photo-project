@@ -1,7 +1,7 @@
 require_relative "boot"
 
 require "rails/all"
-
+# puts "Rails master key: #{ENV['RAILS_MASTER_KEY']}"
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
