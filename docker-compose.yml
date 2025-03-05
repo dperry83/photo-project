@@ -1,0 +1,58 @@
+
+services:
+  web:
+    build: 
+      dockerfile: ./PhotoServer/Dockerfile
+    volumes:
+#      - ".:/usr/src/app"
+      - ".:/rails"
+      - rails_tmp:/rails/tmp
+    ports:
+      - "3000:3000"
+
+    env_file:
+      - .env
+    environment:
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+    depends_on:
+      - db
+    networks:
+      - app_network
+    
+  db:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - app_network
+
+  frontend:
+    build:
+      context: ./frontend  # Points to your Vue.js project
+      dockerfile: Dockerfile
+    volumes:
+      - "./frontend:/frontend"
+      - "/frontend/node_modules"  # Prevents syncing node_modules between host & container
+    ports:
+      - "8080:8080"  # Vue.js default port
+    environment:
+      - VITE_API_URL=http://web:3000  # Vue.js should use the backend service name
+    depends_on:
+      - web
+    networks:
+      - app_network
+
+volumes:
+  mariadb_data:
+  rails_tmp:
+
+networks:
+  app_network:
+    driver: bridge
