@@ -1,20 +1,29 @@
-# Use an official Node.js image as the base
-FROM node:18-alpine
+# use lightweight Node.js image as base
+FROM node:20-alpine AS builder
 
-# Set working directory inside the container
-WORKDIR /frontend
+# set the working directory inside the container
+WORKDIR /app
 
-# Copy only package.json and package-lock.json first (to leverage Docker caching)
+# copy package.json and package-lock.json first for caching dependencies
 COPY package*.json ./
 
-# Install dependencies
+# install dependencies
 RUN npm install
 
-# Copy the rest of the project files
+# copy the rest of the application
 COPY . .
 
-# Expose the port that the Vue dev server runs on
-EXPOSE 8080
+# build the application
+RUN npm run build
 
-# Start the development server
-CMD ["npm", "run", "dev", "--", "--host"]
+# use Nginx to serve the built app
+FROM nginx:1.25-alpine
+
+# copy built files from the builder stage
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# expose port 80 
+EXPOSE 80
+
+# start Nginx
+CMD ["nginx", "-g", "daemon off;"]

@@ -1,23 +1,19 @@
 
 services:
-  web:
-    build: 
-      dockerfile: ./PhotoServer/Dockerfile
-    volumes:
-#      - ".:/usr/src/app"
-      - ".:/rails"
-      - rails_tmp:/rails/tmp
+  backend:
+    build:
+      context: . 
+      dockerfile: ./PhotoServer/Dockerfile.dev
     ports:
       - "3000:3000"
-
+    volumes:
+      - .:/rails
+      - /rails/tmp
     env_file:
       - .env
     environment:
-      MYSQL_HOST: ${MYSQL_HOST}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+      RAILS_ENV=development
+      RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
     depends_on:
       - db
     networks:
@@ -26,8 +22,11 @@ services:
   db:
     image: mariadb:latest
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      # MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
       - mariadb_data:/var/lib/mysql
     networks:
@@ -36,7 +35,7 @@ services:
   frontend:
     build:
       context: ./frontend  # Points to your Vue.js project
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     volumes:
       - "./frontend:/frontend"
       - "/frontend/node_modules"  # Prevents syncing node_modules between host & container

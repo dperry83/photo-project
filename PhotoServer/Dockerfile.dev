@@ -1,0 +1,35 @@
+# full Ruby image for development
+FROM ruby:3.2.2
+
+# install dev dependencies
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y \
+    curl libjemalloc2 libvips sqlite3 \
+    nodejs npm yarn \
+    build-essential git pkg-config && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+# set working directory
+WORKDIR /rails
+
+# install MySQL client libraries
+RUN apt-get update -qq && apt-get install -y \
+    default-libmysqlclient-dev libmariadb-dev libmariadb3
+
+# install gems
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
+
+# copies the application, but leans on volume mounting for code changes
+COPY . .
+
+# set up environment variables
+ENV RAILS_ENV=development
+ENV RAILS_LOG_TO_STDOUT="true"
+ENV RAILS_SERVE_STATIC_FILES="true"
+
+# expose dev-friendly ports
+EXPOSE 3000 3035
+
+# command run in development (rm stale PID and start server)
+CMD ["sh", "-c", "rm -f /rails/tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0 -p 3000"]
