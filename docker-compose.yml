@@ -42,7 +42,7 @@ services:
     ports:
       - "8080:8080"  # Vue.js default port
     environment:
-      - VITE_API_URL=http://backend:3000  # Vue.js should use the backend service name
+      - VITE_API_URL="http://backend:3000"  # Vue.js should use the backend service name
     depends_on:
       - backend
     networks:
