@@ -2,8 +2,8 @@
 services:
   backend:
     build:
-      context: . 
-      dockerfile: ./PhotoServer/Dockerfile.dev
+      context: ./PhotoServer
+      dockerfile: Dockerfile.dev
     ports:
       - "3000:3000"
     volumes:
@@ -12,8 +12,8 @@ services:
     env_file:
       - .env
     environment:
-      RAILS_ENV=development
-      RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+      RAILS_ENV: development
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
     depends_on:
       - db
     networks:
@@ -44,7 +44,7 @@ services:
     environment:
       - VITE_API_URL=http://web:3000  # Vue.js should use the backend service name
     depends_on:
-      - web
+      - backend
     networks:
       - app_network
 
