@@ -7,7 +7,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - .:/rails
+      - ./PhotoServer:/rails
       - /rails/tmp
     env_file:
       - .env
@@ -34,15 +34,15 @@ services:
 
   frontend:
     build:
-      context: ./frontend  # Points to your Vue.js project
+      context: ./front_end  # Points to your Vue.js project
       dockerfile: Dockerfile.dev
     volumes:
-      - "./frontend:/frontend"
+      - "./front_end:/app"
       - "/frontend/node_modules"  # Prevents syncing node_modules between host & container
     ports:
       - "8080:8080"  # Vue.js default port
     environment:
-      - VITE_API_URL=http://web:3000  # Vue.js should use the backend service name
+      - VITE_API_URL=http://backend:3000  # Vue.js should use the backend service name
     depends_on:
       - backend
     networks:
