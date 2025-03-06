@@ -2,7 +2,7 @@
 FROM node:20-alpine
 
 # Set working directory inside the container
-WORKDIR /frontend
+WORKDIR /app
 
 # Copy only package.json and package-lock.json first (to leverage Docker caching)
 COPY package*.json ./
