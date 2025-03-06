@@ -19,7 +19,7 @@ development:
   database: <%= ENV['MYSQL_DATABASE'] %>
   username: <%= ENV['MYSQL_USER'] %>
   password: <%= ENV['MYSQL_PASSWORD'] %>
-  host: <%= ENV['MYSQL_HOST'] %>
+  host: <%= ENV['DB_HOST'] || 'db' %>
   port: 3306
 
 # Warning: The database defined as "test" will be erased and
