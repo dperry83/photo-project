@@ -1,14 +1,12 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import eslintPlugin from 'vite-plugin-eslint';
 
 export default defineConfig({
-  plugins: [vue()],
-  server: {
-    port: 8080 // match your old dev server port if needed
-  },
-  resolve: {
-    alias: {
-      '@': '/src',
-    },
-  },
+    plugins: [vue(), eslintPlugin()],
+    server: {
+        proxy: {
+            '/api': 'http://localhost:3000'
+        }
+    }
 })

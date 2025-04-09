@@ -42,7 +42,7 @@ services:
       - "./front_end:/app"
       - "/frontend/node_modules"  # Prevents syncing node_modules between host & container
     ports:
-      - "8080:8080"  # Vue.js default port
+      - "5173:5173"  # Vue.js default port
     environment:
       - VITE_API_URL="http://backend:3000"  # Vue.js should use the backend service name
     depends_on:
