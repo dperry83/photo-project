@@ -8,16 +8,18 @@
 
 <script>
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
+// import axios from 'axios'
+import authService from '../services/AuthService.js'
 
 const message = ref(null)
 
 onMounted(async () => {
   try {
-    const res = await axios.get('http://localhost:3000/api/status')
+    const res = authService.test()
+    // const res = await axios.get('http://localhost:3000/api/status')
     message.value = res.data.message
   } catch (err) {
-    console.error('API connectoin failed:', err)
+    console.error('API connection failed:', err)
     message.value = 'Connection Failed'
   }
 })
