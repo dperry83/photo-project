@@ -16,7 +16,6 @@ const message = ref(null)
 onMounted(async () => {
   try {
     const res = authService.test()
-    // const res = await axios.get('http://localhost:3000/api/status')
     message.value = res.data.message
   } catch (err) {
     console.error('API connection failed:', err)

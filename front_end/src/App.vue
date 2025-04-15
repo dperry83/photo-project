@@ -1,27 +1,24 @@
 <template>
-  <div class="main">
-    <gallery-page/>
+  <div id="main">
+    <page-header />
+    <router-view />
   </div>
 </template>
 
 <script>
-import GalleryPage from './views/GalleryPage.vue'
+import PageHeader from './components/PageHeader.vue';
 
 export default {
   name: 'App',
   components: {
-    GalleryPage
+    PageHeader
   }
 }
 </script>
 
 <style>
-/* body {
-  height: 100vh;
-  border: 4px green solid;
-  display: flex;
-} */
-#app {
+
+/* #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -29,6 +26,6 @@ export default {
   color: #2c3e50;
   border: 3px red solid;
   
-}
+} */
 
 </style>
