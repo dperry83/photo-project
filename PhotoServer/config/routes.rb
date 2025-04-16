@@ -16,9 +16,9 @@ Rails.application.routes.draw do
   root to: "users#index"
 
   get "/api/status", to: "api#status"
-  get "/users/new", to: "users#new"
-  post "/users", to: "users#create"
-  get "/users/home", to: "users#home"
+  get "/user/new", to: "users#new"
+  post "/user/new", to: "users#create"
+  get "/user/home", to: "users#home"
   get "/session/new", to: "sessions#new"
-  post "/session", to: "sessions#create"
+  post "/session/new", to: "sessions#create"
 end

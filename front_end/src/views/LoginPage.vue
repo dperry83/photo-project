@@ -17,7 +17,9 @@
           placeholder="password"
           v-model="user.password"
           required> <br>
-      <button class="log-in">Login</button>
+      <button 
+      class="log-in"
+      @click="login">Login</button>
   </div>  
 </template>
 
@@ -35,8 +37,17 @@ export default {
     }
   },
   methods: {
-    login() {
-
+    login(user) {
+      AuthService.login(user.email, user.password)
+        .then(response => {
+          if(response.status == 200) {
+            console.log("login successful")
+          }
+        })
+        .catch(error => {
+          const response = error.response
+          console.log(response)
+        })
     }
   }
 }
