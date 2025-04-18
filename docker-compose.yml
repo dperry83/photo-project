@@ -1,4 +1,4 @@
-
+#version: "3.9"
 services:
   backend:
     build:
@@ -7,8 +7,8 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./PhotoServer:/rails
-      - /rails/tmp
+      - ./PhotoServer:/rails  # Live sync Rails code in dev
+      - rails_tmp:/rails/tmp  # Use named volume for tmp files
     env_file:
       - .env
     environment:
@@ -22,7 +22,7 @@ services:
   db:
     image: mariadb:latest
     environment:
-      # MYSQL_HOST: ${MYSQL_HOST}
+      # Environment variables from .env
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -30,7 +30,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - mariadb_data:/var/lib/mysql
+      - mariadb_data:/var/lib/mysql #persist DB data in development
     networks:
       - app_network
 
@@ -39,12 +39,12 @@ services:
       context: ./front_end  # Points to your Vue.js project
       dockerfile: Dockerfile.dev
     volumes:
-      - "./front_end:/app"
-      - "/frontend/node_modules"  # Prevents syncing node_modules between host & container
+      - ./front_end:/app        # Live sync Vue code
+      - /frontend/node_modules  # Prevents syncing node_modules between host & container
     ports:
       - "5173:5173"  # Vue.js default port
-    environment:
-      - VITE_API_URL="http://backend:3000"  # Vue.js should use the backend service name
+#    environment:
+#      VITE_API_URL="http://backend:3000"  # Vue.js should use the backend service name
     depends_on:
       - backend
     networks:

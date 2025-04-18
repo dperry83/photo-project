@@ -35,6 +35,7 @@
 /app/assets/builds/*
 !/app/assets/builds/.keep
 /public/assets
+dist
 
 # Ignore CI service files.
 /.github

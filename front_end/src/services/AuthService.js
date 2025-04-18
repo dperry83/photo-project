@@ -6,7 +6,7 @@ export default {
   },
   login(email, password) {
     return axios.post('/session/new', {
-      email: email,
+      email_address: email,
       password: password
     }, {
       headers: { 'Content-Type': 'application/json' }
