@@ -37,8 +37,9 @@ export default {
     }
   },
   methods: {
-    login(user) {
-      AuthService.login(user.email, user.password)
+    login() {
+      AuthService
+        .login(this.user.email, this.user.password)
         .then(response => {
           if(response.status == 200) {
             console.log("login successful")

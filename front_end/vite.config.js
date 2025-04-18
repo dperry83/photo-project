@@ -6,7 +6,7 @@ export default defineConfig({
     plugins: [vue()],
     server: {
         proxy: {
-            '/api': {
+            '^/(api|session|user)': {
                 target: 'http://backend:3000',
                 changeOrigin: true
             }
