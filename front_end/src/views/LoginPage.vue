@@ -42,12 +42,12 @@ export default {
         .login(this.user.email, this.user.password)
         .then(response => {
           if(response.status == 200) {
-            console.log("login successful")
+            console.log(response.message)
           }
         })
         .catch(error => {
           const response = error.response
-          console.log(response)
+          console.log(response.message)
         })
     }
   }
