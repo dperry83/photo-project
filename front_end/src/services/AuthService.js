@@ -9,7 +9,8 @@ export default {
       email_address: email,
       password: password
     }, {
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true
     })
   }
 }
