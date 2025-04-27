@@ -11,9 +11,6 @@ class UsersController < ApplicationController
     render json: @users
   end
 
-  def authenticate_by( email_address, password )
-    
-  end
 
   def create
     user = User.new(user_params)

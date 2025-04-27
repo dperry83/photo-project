@@ -1,18 +1,24 @@
 class SessionsController < ApplicationController
   allow_unauthenticated_access only: %i[ new create ]
   skip_before_action :verify_authenticity_token
+  before_action :disable_rails_session
+  # skip_before_action :reset_session
   rate_limit to: 10, within: 3.minutes, only: :create, with: -> { redirect_to new_session_url, alert: "Try again later." }
   include Authentication
 
   def new
   end
 
+  def disable_rails_session
+    request.session_options[:skip] = true
+  end
   def create
     credentials = params.permit( :email_address, :password )
 
     if user = User.authenticate_by(email_address: credentials[:email_address], password: credentials[:password])
+    # if user = find_by(credentials[:email_address])
 
-      start_new_session_for user
+    # start_new_session_for(user)
       token = JWT.encode( { user_id: user.id }, ENV.fetch("JWT_SECRET_KEY"), "HS256", { typ: "JWT", alg: "HS256" } )
       set_cookie(token: token)
       Rails.logger.info("Token created: #{token}")
@@ -22,6 +28,7 @@ class SessionsController < ApplicationController
       render json: { error: "Invalid email address or password." }, status: :unauthorized
     end
   end
+
 
   def set_cookie(token:)
     cookies.encrypted[:jwt] = {

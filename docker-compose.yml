@@ -4,7 +4,6 @@ services:
     build:
       context: ./PhotoServer
       dockerfile: Dockerfile.dev
-    working_dir: /app
     ports:
       - "3000:3000"
       - "1234:1234"
