@@ -52,7 +52,8 @@ group :development, :test do
 
   ## these are for the debugger
   gem "debase", "~> 0.2.8"
-  gem "ruby-debug-ide", "~> 0.7.4"
+  gem "ruby-debug-ide", "~> 0.7.0"
+  gem "io-console", "~> 0.8.0"
   ## end debugger
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]

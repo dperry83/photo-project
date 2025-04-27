@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     render json: @users
   end
 
-  def home
+  def authenticate_by( email_address, password )
     
   end
 
