@@ -19,7 +19,7 @@
           required> <br>
       <button 
       class="log-in"
-      @click="login">Login</button>
+      @click="login()">Login</button>
   </div>  
 </template>
 
@@ -38,16 +38,18 @@ export default {
   },
   methods: {
     login() {
+      console.log("Login form submitted: ", this.user)
       AuthService
         .login(this.user.email, this.user.password)
         .then(response => {
           if(response.status == 200) {
-            console.log(response.message)
+            console.log(response)
+            // this.$router.push('/user')
           }
         })
         .catch(error => {
           const response = error.response
-          console.log(response.message)
+          console.log(response)
         })
     }
   }
