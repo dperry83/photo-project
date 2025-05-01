@@ -10,6 +10,7 @@ services:
     volumes:
       - ./PhotoServer:/rails  # Live sync Rails code in dev
       - rails_tmp:/rails/tmp  # Use named volume for tmp files
+      - bundle_cache:/usr/local/bundle # persist gems in container
     env_file:
       - .env
     environment:
@@ -54,6 +55,7 @@ services:
 volumes:
   mariadb_data:
   rails_tmp:
+  bundle_cache:
 
 networks:
   app_network:
