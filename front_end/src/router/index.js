@@ -9,7 +9,7 @@ const routes = [
     name: 'Login', 
     component: AuthPage },
   
-  { path: '/user', 
+  { path: '/user/:id', 
     name: 'Gallery', 
     component: GalleryPage }
 ]

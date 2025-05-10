@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get "/api/status", to: "api#status"
   get "/user/new", to: "users#new"
   post "/user/new", to: "users#create"
+  get "/user/me", to: "users#current_user"
   get "/user/home", to: "users#home"
   get "/session/new", to: "sessions#new"
   post "/session/new", to: "sessions#create"

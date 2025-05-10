@@ -6,6 +6,10 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def current_user
+
+  end
+
   def index
     @users = User.all
     render json: @users

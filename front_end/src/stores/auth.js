@@ -7,7 +7,10 @@ export const useAuthStore = defineStore('auth', () => {
   const isAuthenticated = computed(() => !!user.value)
 
   function setUser(userData) {
-    user.value = userData
+    // user.value = userData
+    user.value.id = userData.id
+    user.value.name = userData.name
+    user.value.email_address = userData.email_address
   }
 
   function clearUser() {

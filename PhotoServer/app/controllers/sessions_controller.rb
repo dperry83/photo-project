@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
       token = JWT.encode( { user_id: user.id }, ENV.fetch("JWT_SECRET_KEY"), "HS256", { typ: "JWT", alg: "HS256" } )
       set_cookie(token: token)
       Rails.logger.info("Token created: #{token}")
-      render json: { token: token, message: "Logged in successfully.", user: user.slice( :name ) }, status: :ok
+      render json: { token: token, message: "Logged in successfully.", user: user.slice( :id, :email_address, :name ) }, status: :ok
     else
       Rails.logger.info("Authentication failed for email: #{params[:email_address]}")
       render json: { error: "Invalid email address or password." }, status: :unauthorized
