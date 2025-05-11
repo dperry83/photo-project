@@ -47,7 +47,7 @@ export default {
         .then(response => {
           if(response.status == 200) {
             useAuthStore.setUser(response.user)
-            this.$router.push('/user/${response.user_id}')
+            this.$router.push('/user/me')
           }
         })
         .catch(error => {

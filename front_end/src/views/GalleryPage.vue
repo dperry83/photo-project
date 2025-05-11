@@ -19,6 +19,9 @@ export default {
     PageHeader,
     LeftNavigation,
     BioCard
+  },
+  onMounted() {
+    
   }
 }
 

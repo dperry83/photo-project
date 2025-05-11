@@ -13,16 +13,19 @@ module Authentication
   end
 
   private
+    def authenticate_user!
+      token = cookies.encrypted['jwt']
+
+      decoded_token = JWT.decode(token, ENV.fetch("JWT_SECRET_KEY"), true, { algorithm: "HS256" })
+      user_id = decoded_token[0]["user_id"]
+      @current_user = User.find(user_id)
+    end
     def authenticated?
       resume_session
     end
 
     def require_authentication
       resume_session || request_authentication
-    end
-
-    def find_by(email_address)
-
     end
     def resume_session
       Current.session ||= find_session_by_cookie

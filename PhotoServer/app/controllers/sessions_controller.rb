@@ -16,12 +16,8 @@ class SessionsController < ApplicationController
     credentials = params.permit( :email_address, :password )
 
     if user = User.authenticate_by(email_address: credentials[:email_address], password: credentials[:password])
-    # if user = find_by(credentials[:email_address])
-
-    # start_new_session_for(user)
       token = JWT.encode( { user_id: user.id }, ENV.fetch("JWT_SECRET_KEY"), "HS256", { typ: "JWT", alg: "HS256" } )
       set_cookie(token: token)
-      Rails.logger.info("Token created: #{token}")
       render json: { token: token, message: "Logged in successfully.", user: user.slice( :id, :email_address, :name ) }, status: :ok
     else
       Rails.logger.info("Authentication failed for email: #{params[:email_address]}")

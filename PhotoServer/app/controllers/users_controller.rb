@@ -1,13 +1,14 @@
 class UsersController < ApplicationController
   # do not require authentication to create a new
-  skip_before_action :require_authentication, only: [ :new, :create ]
+  skip_before_action :require_authentication, only: [ :new, :create, :get_current_user ]
+  include Authentication
 
   def new
     @user = User.new
   end
 
-  def current_user
-
+  def get_current_user
+    render json: { current_user: @current_user.slice(:id, :email_address, :name) }, status: :ok
   end
 
   def index
