@@ -46,7 +46,7 @@ export default {
         .login(this.user.email, this.user.password)
         .then(response => {
           if(response.status == 200) {
-            useAuthStore.setUser(response.user)
+            useAuthStore.setUser(response.current_user)
             this.$router.push('/user/me')
           }
         })
