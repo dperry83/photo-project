@@ -7,7 +7,7 @@
           id="email-address" 
           class="form-control"
           placeholder="email address"
-          v-model="user.email"
+          v-model="email"
           required> <br>
       <label for="password">password:</label>
         <input 
@@ -15,46 +15,42 @@
           id="password" 
           class="form-control"
           placeholder="password"
-          v-model="user.password"
+          v-model="password"
           required> <br>
       <button 
-      class="log-in"
-      @click="login()">Login</button>
+        class="log-in"
+        @click="login()">Login</button>
+      
   </div>  
 </template>
 
-<script>
-import AuthService from '../services/AuthService';
+<script setup>
 
-import { useAuthStore } from '@/stores/auth';
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '../stores/auth.js'
+import AuthService from '../services/AuthService'
 
 
-export default {
-  name: 'LoginPage',
-  data() {
-    return {
-      user: {
-        email: "",
-        password: ""
-      }
+const email = ref('')
+const password = ref('')
+const authStore = useAuthStore()
+const router = useRouter()
+
+const login = async () => {
+  console.log("Login submitted: ", email.value, " ,", password.value )
+
+  try {
+    const response = await AuthService.login(email.value, password.value)
+
+    if (response.status === 200) {
+      console.log('User in response:', response.data.user)
+      authStore.setCurrentUser(response.data.user)
+      router.push('/user/me')
     }
-  },
-  methods: {
-    login() {
-      console.log("Login form submitted: ", this.user)
-      AuthService
-        .login(this.user.email, this.user.password)
-        .then(response => {
-          if(response.status == 200) {
-            useAuthStore.setUser(response.current_user)
-            this.$router.push('/user/me')
-          }
-        })
-        .catch(error => {
-          const response = error.response
-          console.log(response)
-        })
-    }
+  } catch (error) {
+    console.error('Login failed: ', error.response)
   }
 }
+
 </script>

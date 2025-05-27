@@ -1,19 +1,23 @@
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
 
-export const useAuthStore = defineStore('auth', () => {
-  const user = ref(null)
-  const isAuthenticated = computed(() => !!user.value)
+export const useAuthStore = defineStore('auth', {
+  state: () => ({ 
+    user: null
+  }),
+  
+  getters: {
+    
+  },
 
-  function setUser(userData) {
-    user.value.id = userData.id
-    user.value.name = userData.name
-    user.value.email_address = userData.email_address
+  actions: {
+    setCurrentUser(user) {
+      console.log("setting user to: ", user)
+      this.user = user
+    },
+
+    logout() {
+      this.user = null
+    }
   }
 
-  function clearUser() {
-    user.value = null
-  }
-
-  return { user, isAuthenticated, setUser, clearUser }
 })
