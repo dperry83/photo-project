@@ -10,6 +10,7 @@ const routes = [
   { path: '/user/me', 
     name: 'Gallery', 
     component: GalleryPage },
+    
   { path: '/test',
     name: 'Test',
     component: {

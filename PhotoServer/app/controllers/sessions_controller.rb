@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
   def disable_rails_session
     request.session_options[:skip] = true
   end
-  def create
+  def user_login
     credentials = params.permit( :email_address, :password )
 
     if user = User.authenticate_by(email_address: credentials[:email_address], password: credentials[:password])
@@ -30,7 +30,8 @@ class SessionsController < ApplicationController
     cookies.encrypted[:jwt] = {
       value: token,
       httponly: true,
-      secure: Rails.env.production?,
+      # secure: Rails.env.production?,
+      secure: false,
       same_site: :lax,
       expires: 24.hours.from_now
     }
