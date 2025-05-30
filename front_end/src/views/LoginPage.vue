@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Login Page</h1>
+      <h3 class="error-message"> {{ message }}</h3>
       <label for="email-address">email:</label>
         <input 
           type="text" 
@@ -34,22 +35,24 @@ import AuthService from '../services/AuthService'
 
 const email = ref('')
 const password = ref('')
+const message = ref('')
 const authStore = useAuthStore()
 const router = useRouter()
 
-const login = async () => {
-  console.log("Login submitted: ", email.value, " ,", password.value )
 
+const login = async () => {
+  // console.log("Login submitted: ", email.value, " ,", password.value )
+  
   try {
     const response = await AuthService.login(email.value, password.value)
-
     if (response.status === 200) {
-      console.log('User in response:', response.data.user)
+      // console.log('User in response:', response.data.user)
       authStore.setCurrentUser(response.data.user)
       router.push('/user/me')
     }
   } catch (error) {
-    console.error('Login failed: ', error.response)
+    console.error('Login failed: ', error.message)
+    message.value = error.response.data.error
   }
 }
 
