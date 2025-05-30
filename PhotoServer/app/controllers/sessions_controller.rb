@@ -1,9 +1,9 @@
 class SessionsController < ApplicationController
-  allow_unauthenticated_access only: %i[ new create ]
+  allow_unauthenticated_access only: %i[ new user_login ]
   skip_before_action :verify_authenticity_token
   before_action :disable_rails_session
   # skip_before_action :reset_session
-  rate_limit to: 10, within: 3.minutes, only: :create, with: -> { redirect_to new_session_url, alert: "Try again later." }
+  rate_limit to: 10, within: 3.minutes, only: :user_login, with: -> { redirect_to new_session_url, alert: "Try again later." }
   include Authentication
 
   def new

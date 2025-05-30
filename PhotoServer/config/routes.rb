@@ -20,6 +20,6 @@ Rails.application.routes.draw do
   post "/user/new", to: "users#create"
   get "/user/me", to: "users#get_current_user"
   get "/user/home", to: "users#home"
-  get "/session/new", to: "sessions#user_login"
-  post "/session/new", to: "sessions#create"
+  get "/session/new", to: "sessions#new"
+  post "/session/new", to: "sessions#user_login"
 end
