@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { apiRequest } from './api.js'
+// import { apiRequest } from './api.js'
 
 export default { 
 
@@ -11,8 +11,8 @@ export default {
         headers: { 'Content-Type': 'application/json'}
       })  
     },
-  createNewUser(credentials) {
-    return axios.post('/user/new', {
+  async createNewUser(credentials) {
+    return await axios.post('/user/new', {
       user: credentials
     }, 
     { 

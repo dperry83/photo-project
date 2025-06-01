@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   # do not require authentication to create a new
   skip_before_action :require_authentication, only: [ :new, :create, :user_params ]
-  skip_forgery_protection 
+  skip_forgery_protection
   include Authentication
 
   def new
