@@ -33,7 +33,7 @@ ENV RAILS_LOG_TO_STDOUT="true"
 ENV RAILS_SERVE_STATIC_FILES="true"
 
 # expose dev-friendly ports
-EXPOSE 3000 3035
+EXPOSE 3000 1234
 
 # command run in development (rm stale PID and start server)
 CMD ["sh", "-c", "rm -f /rails/tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0 -p 3000"]

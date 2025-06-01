@@ -1,29 +1,45 @@
 <template>
   <div>
     <h1>Login Page</h1>
-      <h3 class="error-message"> {{ message }}</h3>
-      <label for="email-address">email:</label>
-        <input 
+      <h3> Please enter your information: </h3>
+      <!-- <label for="email-address">email:</label> -->
+        <input class="form-control"
           type="text" 
           id="email-address" 
-          class="form-control"
           placeholder="email address"
           v-model="email"
           required> <br>
-      <label for="password">password:</label>
-        <input 
+      <!-- <label for="password"></label> -->
+        <input class="form-control"
           type="text" 
           id="password" 
-          class="form-control"
           placeholder="password"
           v-model="password"
           required> <br>
-      <button 
-        class="log-in"
-        @click="login()">Login</button>
+      <!-- <label for="user-name" class="name"></label> -->
+        <input class="user-name"
+          type="text" 
+          placeholder="full name"
+          v-model="name"
+          required><br>
+        <!-- <span class="options"> -->
+        <button class="log-in"
+          @click="login()">Login</button>
+        <p class="new-user"><i>Register</i></p>
+        <!-- </span> -->
+        <button 
+          class="register"
+          @click="createUser()">Register</button>   <!--Sanity check-->
       
   </div>  
 </template>
+
+<style>
+.new-user {
+  color: blue;
+  font-style: italic;
+}
+</style>
 
 <script setup>
 
@@ -35,25 +51,42 @@ import AuthService from '../services/AuthService'
 
 const email = ref('')
 const password = ref('')
-const message = ref('')
+const name = ref('')
+// const newUser = false
 const authStore = useAuthStore()
 const router = useRouter()
 
 
-const login = async () => {
-  // console.log("Login submitted: ", email.value, " ,", password.value )
-  
+const login = async () => {  
   try {
     const response = await AuthService.login(email.value, password.value)
     if (response.status === 200) {
-      // console.log('User in response:', response.data.user)
+      authStore.setCurrentUser(response.data.user)
+      router.push('/user/me')
+    } else if (response.status === 401) {
+      console.log('No account found.  Please sign up!')
+      // router.push('/user/new')
+    }
+  } catch (error) {
+    console.error('Login failed: ', error.message)
+    // error.message.value = error.response.data.error
+  }
+}
+
+const createUser = async() => {
+  try {
+    const response = await AuthService.createNewUser({
+      email_address: email.value, 
+      password: password.value, 
+      name: name.value})
+    if (response.status === 201) {
       authStore.setCurrentUser(response.data.user)
       router.push('/user/me')
     }
   } catch (error) {
-    console.error('Login failed: ', error.message)
-    message.value = error.response.data.error
+    console.error('Registration Failed: ', error.message)
   }
 }
 
 </script>
+
