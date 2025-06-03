@@ -65,11 +65,10 @@ const login = async () => {
       router.push('/user/me')
     } else if (response.status === 401) {
       console.log('No account found.  Please sign up!')
-      // router.push('/user/new')
+      router.push('/user/new')
     }
   } catch (error) {
     console.error('Login failed: ', error.message)
-    // error.message.value = error.response.data.error
   }
 }
 
