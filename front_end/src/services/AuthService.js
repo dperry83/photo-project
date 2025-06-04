@@ -4,7 +4,7 @@ import { apiRequest } from './api.js'
 export default { 
   async login(email_address, password) {
     return await apiRequest({
-      url: '/session/new',
+      url: '/user/login',
       method: 'POST',
       data: {
         email_address: email_address,

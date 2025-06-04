@@ -1,17 +1,11 @@
-class SessionsController < ApplicationController
-  allow_unauthenticated_access only: %i[ new user_login ]
+class AuthController < ApplicationController
+  allow_unauthenticated_access only: %i[ user_login ]
   skip_before_action :verify_authenticity_token
-  before_action :disable_rails_session
+  # before_action :disable_rails_session
   # skip_before_action :reset_session
   rate_limit to: 10, within: 3.minutes, only: :user_login, with: -> { redirect_to new_session_url, alert: "Try again later." }
   include Authentication
 
-  def new
-  end
-
-  def disable_rails_session
-    request.session_options[:skip] = true
-  end
   def user_login
     credentials = params.permit( :email_address, :password )
 
@@ -25,7 +19,6 @@ class SessionsController < ApplicationController
     end
   end
 
-
   def set_cookie(token:)
     cookies.encrypted[:jwt] = {
       value: token,
@@ -37,8 +30,5 @@ class SessionsController < ApplicationController
     }
     Rails.logger.info("Cookie set to: #{cookies.to_hash}")
   end
-  def destroy
-    terminate_session
-    redirect_to new_session_path
-  end
+
 end
