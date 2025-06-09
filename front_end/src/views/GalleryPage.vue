@@ -1,6 +1,6 @@
 <template>
   <div class="main-layout">
-    <PageHeader class="banner" id="header"/>
+    <!-- <PageHeader class="banner" id="header"/> -->
     <LeftNavigation id="left-nav"/>
     <div class="content">main content
       <BioCard class="user-info"></BioCard>
@@ -9,14 +9,14 @@
 </template>
 
 <script>
-import PageHeader from '../components/PageHeader.vue'
+// import PageHeader from '../components/PageHeader.vue'
 import LeftNavigation from '../components/LeftNavigation.vue'
 import BioCard from '../components/BioCard.vue'
 
 export default {
   name: 'GalleryPage',
   components: {
-    PageHeader,
+    // PageHeader,
     LeftNavigation,
     BioCard
   },
